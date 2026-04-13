@@ -1,0 +1,29 @@
+name: Salesforce Apex Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Salesforce CLI
+        run: npm install -g @salesforce/cli
+
+      - name: Authenticate Salesforce Org
+        run: |
+          echo "${{ secrets.SFDX_AUTH_URL }}" > auth.txt
+          sf org login sfdx-url -f auth.txt -a myOrg
+
+      - name: Run Apex Tests
+        run: |
+          sf apex run test \
+            --target-org myOrg \
+            --result-format human \
+            --wait 10
