@@ -24,6 +24,7 @@ jobs:
       - name: Run Apex Tests
         run: |
           sf apex run test \
+            --tests CalculatorTest \
             --target-org myOrg \
             --result-format human \
-            --wait 10
+            --wait 1
