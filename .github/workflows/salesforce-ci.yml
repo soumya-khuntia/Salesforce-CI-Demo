@@ -27,4 +27,4 @@ jobs:
             --tests CalculatorTest \
             --target-org myOrg \
             --result-format human \
-            --wait 1
+            --wait 5
